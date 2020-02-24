@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/home/submit','HomeController@submit');
 
+Route::get('/home', 'HomeController@index')->name('home');

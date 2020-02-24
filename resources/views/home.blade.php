@@ -50,14 +50,20 @@
                 <table class="table table-striped" class="table-responsive" class="table table-sm" border = 2 style="margin: 0px auto;">
          <tr style="text-align:center">
          <thead class="thead-dark">
-            <!-- <td>ID</td> -->
-            <td>phoneNumber</td>
-            <td>deposits</td>
-            </thead>
+
+            <td>PhoneNumber</td>
+            <td>Deposit</td>
+            
          </tr>
-         
-        
+         @foreach ($deposits as $deposit)
+         <tr>
+            <td>{{ $deposit->phoneNumber}}</td>
+            <td>{{ $deposit->deposit }}</td>
+       
+         </tr>
+         @endforeach
       </table>
+      
 
 
                 </form>
