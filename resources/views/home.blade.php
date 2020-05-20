@@ -51,21 +51,12 @@
          <tr style="text-align:center">
          <thead class="thead-dark">
 
-            <td>PhoneNumber</td>
-            <td>Deposit</td>
-            
+            <td>Balance</td>
          </tr>
-         @foreach ($deposits as $deposit)
          <tr>
-            <td>{{ $deposit->phoneNumber}}</td>
-            <td>{{ $deposit->deposit }}</td>
-       
+            <td>{{ $deposits}}</td>
          </tr>
-         @endforeach
       </table>
-      
-
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -91,8 +82,8 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form>
+            <!-- <div class="modal-body"> -->
+                <!-- <form>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Enter Amount:</label>
                     <input type="text" class="form-control" name="recipient-name">
@@ -102,11 +93,33 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Send</button>
+                <button type="button" class="btn btn-primary">Ok</button>
+            </div> -->
+
+            <div class= "jumbotron custom-form-width-wrapper">
+            {!! Form::open(['url' => 'home/submit']) !!}
+            <div class="form-group {{ $errors->has('deposit') ? 'has-error' : '' }}">
+            {{Form::label('Withdraw', 'Withdraw')}}<br>
+            <span class="text-danger">{{ $errors->first('deposit') }}</span>
+            {{Form::number('deposit', '', ['class' => 'form-control', 'placeholder' => 'Enter Amount','required'])}}
+            
             </div>
+            <div style = "float:right; clearfix: both;">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            {{Form::submit('Ok', ['class' => 'btn btn-primary'])}}
+            
+        </div>
+        {!! Form::close() !!}
+
+        </div>
+            
+
+
             </div>
         </div>
         </div>
+
+        
     <!-- End Withdraw Modal -->
 
      <!-- Button trigger deposit modal -->
@@ -163,9 +176,9 @@
         </div>
         <!-- End deposit Modal -->
 
-         <!-- Button trigger Transfer Cash modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cash" data-whatever="@cash">Transfer Cash</button>
-    <!-- Start Transfer Cash Modal -->
+         <!-- Button trigger Send Money modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cash" data-whatever="@cash">Send Money</button>
+    <!-- Start Send Money Modal -->
 
     <div class="modal fade" id="cash" tabindex="-1" role="dialog" aria-labelledby="cashLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -195,7 +208,7 @@
             </div>
         </div>
         </div>
-        <!-- End Transfer Cash Modal -->
+        <!-- End Send Money Modal -->
         
 
                 </div>

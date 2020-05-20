@@ -31,13 +31,18 @@ class HomeController extends Controller
     public function index(Request $request) {
         try{
          $current_logged_in = Auth::User()->phoneNumber;
-         $all_deposits = DB::table('homes')->where('phoneNumber', '=' , $current_logged_in )->get();
+         $all_deposits = DB::table('homes')->where('phoneNumber', '=' , $current_logged_in )->pluck("deposit")->toArray();
+         $total = array_sum($all_deposits);
+       
+
+        //  dd($deposits);
+        //  dd($all_deposits);
          
         //  ->select(DB::raw("SUM(deposit) as count"))->where('phoneNumber', '=' , $current_logged_in)->get();
          
         //  ->where('phoneNumber', '=' , $current_logged_in )->get();
     
-         return view('home', ['deposits'=>$all_deposits]);
+         return view('home', ['deposits'=>$total]);
         }
             
         catch (Exception $e){
@@ -72,11 +77,11 @@ class HomeController extends Controller
         }   
     }
 
-    public function getdeposit() {        
-        $current_logged_in = Auth::user()->phoneNumber;
-        // $sort = addCampaign::where('event_creator_id', $current_logged_in)->sortable()->paginate(5);
-        return view('home')->with('deposits');
-      }
+    // public function getdeposit() {        
+    //     $current_logged_in = Auth::user()->phoneNumber;
+    //     // $sort = addCampaign::where('event_creator_id', $current_logged_in)->sortable()->paginate(5);
+    //     return view('home')->with('deposits');
+    //   }
 
 
 
