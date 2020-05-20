@@ -31,8 +31,12 @@ class HomeController extends Controller
     public function index(Request $request) {
         try{
          $current_logged_in = Auth::User()->phoneNumber;
-         $all_deposits = DB::table('homes')->where('phoneNumber', '=' , $current_logged_in )->pluck("deposit")->toArray();
-         $total = array_sum($all_deposits);
+         $all_deposits = DB::table('homes')->where('phoneNumber', '=' , $current_logged_in )->pluck("deposit")->sum();
+         $all2_deposits = DB::table('withdraws')->where('phoneNumber', '=' , $current_logged_in )->pluck("withdraw")->sum();
+         $balance = $all_deposits - $all2_deposits;
+
+         
+        //  $total = array_sum($all_deposits);
        
 
         //  dd($deposits);
@@ -42,7 +46,7 @@ class HomeController extends Controller
          
         //  ->where('phoneNumber', '=' , $current_logged_in )->get();
     
-         return view('home', ['deposits'=>$total]);
+         return view('home', ['deposits'=>$balance]);
         }
             
         catch (Exception $e){
@@ -82,6 +86,8 @@ class HomeController extends Controller
     //     // $sort = addCampaign::where('event_creator_id', $current_logged_in)->sortable()->paginate(5);
     //     return view('home')->with('deposits');
     //   }
+
+    
 
 
 

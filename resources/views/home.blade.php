@@ -97,11 +97,11 @@
             </div> -->
 
             <div class= "jumbotron custom-form-width-wrapper">
-            {!! Form::open(['url' => 'home/submit']) !!}
+            {!! Form::open(['url' => 'home/withdraw']) !!}
             <div class="form-group {{ $errors->has('deposit') ? 'has-error' : '' }}">
             {{Form::label('Withdraw', 'Withdraw')}}<br>
-            <span class="text-danger">{{ $errors->first('deposit') }}</span>
-            {{Form::number('deposit', '', ['class' => 'form-control', 'placeholder' => 'Enter Amount','required'])}}
+            <span class="text-danger">{{ $errors->first('withdraw') }}</span>
+            {{Form::number('withdraw', '', ['class' => 'form-control', 'placeholder' => 'Enter Amount','required'])}}
             
             </div>
             <div style = "float:right; clearfix: both;">

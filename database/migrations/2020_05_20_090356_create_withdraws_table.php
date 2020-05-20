@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepositsTable extends Migration
+class CreateWithdrawsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateDepositsTable extends Migration
      */
     public function up()
     {
-        Schema::create('deposits', function (Blueprint $table) {
+        Schema::create('withdraws', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('phoneNumber');
-            $table->string('deposit')->default(0);  //set a default value to account
             $table->integer('withdraw')->default(0);
             $table->timestamps();
         });
+
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateDepositsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('deposits');
+        Schema::dropIfExists('withdraws');
     }
 }

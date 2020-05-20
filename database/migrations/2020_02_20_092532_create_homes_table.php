@@ -16,7 +16,7 @@ class CreateHomesTable extends Migration
         Schema::create('homes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('phoneNumber');
-            $table->string('deposit')->default(0);  //set a default value to account
+            $table->integer('deposit')->default(0);  //set a default value to account
             $table->timestamps();
         });
     }
