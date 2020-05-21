@@ -30,21 +30,17 @@ class HomeController extends Controller
 
     public function index(Request $request) {
         try{
+            // $balance = 0;
          $current_logged_in = Auth::User()->phoneNumber;
          $all_deposits = DB::table('homes')->where('phoneNumber', '=' , $current_logged_in )->pluck("deposit")->sum();
          $all2_deposits = DB::table('withdraws')->where('phoneNumber', '=' , $current_logged_in )->pluck("withdraw")->sum();
+        //  dd($all_deposits);
          $balance = $all_deposits - $all2_deposits;
 
-         
-        //  $total = array_sum($all_deposits);
-       
-
-        //  dd($deposits);
-        //  dd($all_deposits);
-         
-        //  ->select(DB::raw("SUM(deposit) as count"))->where('phoneNumber', '=' , $current_logged_in)->get();
-         
-        //  ->where('phoneNumber', '=' , $current_logged_in )->get();
+        //  if ($all_deposits < $all2_deposits){
+        //     $request->session()->flash('alert-danger', ' insuff funds');
+        //  }
+        // else
     
          return view('home', ['deposits'=>$balance]);
         }
@@ -53,10 +49,6 @@ class HomeController extends Controller
             return redirect('/home')->with('failed','Failed');
         }
       }
-
-
-
-
     public function submit(Request $request){
         try { 
        

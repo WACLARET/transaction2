@@ -23,4 +23,6 @@ Route::post('/home/submit','HomeController@submit');
 
 Route::post('/home/withdraw','WithdrawController@withdraw');
 
+Route::post('/home/cash','CashController@cash');
+
 Route::get('/home', 'HomeController@index')->name('home');

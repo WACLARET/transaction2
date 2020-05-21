@@ -177,34 +177,44 @@
         <!-- End deposit Modal -->
 
          <!-- Button trigger Send Money modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cash" data-whatever="@cash">Send Money</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cash" data-whatever="@cash">Transfer Money</button>
     <!-- Start Send Money Modal -->
 
     <div class="modal fade" id="cash" tabindex="-1" role="dialog" aria-labelledby="cashLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cashLabel">Send Money</h5>
+                <h5 class="modal-title" id="cashLabel">Transfer Money</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form>
-                <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Enter Amount:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                </div>
-                <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Enter PhoneNumber:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                </div>
-                </form>
+
+            <div class= "jumbotron custom-form-width-wrapper">
+            {!! Form::open(['url' => 'home/cash']) !!}
+            <div class="form-group {{ $errors->has('deposit') ? 'has-error' : '' }}">
+            {{Form::label('Phone Number', 'Phone Number')}}<br>
+            <span class="text-danger">{{ $errors->first('pNumber') }}</span>
+            {{Form::number('pNumber', '', ['class' => 'form-control', 'placeholder' => 'Enter Phone Number','required'])}}
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Send</button>
+
+            <div class="form-group {{ $errors->has('deposit') ? 'has-error' : '' }}">
+            {{Form::label('Amount', 'Amount')}}<br>
+            <span class="text-danger">{{ $errors->first('amount') }}</span>
+            {{Form::number('amount', '', ['class' => 'form-control', 'placeholder' => 'Enter Amount','required'])}}
             </div>
+            
+            <div style = "float:right; clearfix: both;">
+            {{Form::submit('Send', ['class' => 'btn btn-primary'])}}
+            
+        </div>
+        {!! Form::close() !!}
+
+        </div>
+
+
+
+
             </div>
         </div>
         </div>

@@ -26,14 +26,14 @@ class WithdrawController extends Controller
                 // $message->phoneNumber = $custom_number; 
                 $message->phoneNumber = $current_logged_in;
                 
-                if($request->input('withdraw') >= $all_deposits){
-                    $request->session()->flash('alert-danger', ' Insufficient Cash');
+                if($request->input('withdraw') > $all_deposits){
+                    $request->session()->flash('alert-danger', ' Insuficient Balance');
                     return redirect('/home');
                 } else  {
                     $message->withdraw=$request->input('withdraw');
-                $message->save(); //save the message
-                $request->session()->flash('alert-success', ' Success Withdraw');
-                return redirect('/home');
+                    $message->save(); //save the message
+                    $request->session()->flash('alert-success', ' Success Withdraw');
+                    return redirect('/home');
                 }           
                 
             
