@@ -34,15 +34,21 @@ class HomeController extends Controller
          $current_logged_in = Auth::User()->phoneNumber;
          $all_deposits = DB::table('homes')->where('phoneNumber', '=' , $current_logged_in )->pluck("deposit")->sum();
          $all2_deposits = DB::table('withdraws')->where('phoneNumber', '=' , $current_logged_in )->pluck("withdraw")->sum();
+         $withdraw = DB::table('cashes')->where('phoneNumber', '=' , $current_logged_in )->pluck("amount")->sum();
+        
         //  dd($all_deposits);
          $balance = $all_deposits - $all2_deposits;
+
+         $finalbalance = $balance - $withdraw;
+//  dd($finalbalance);
+
 
         //  if ($all_deposits < $all2_deposits){
         //     $request->session()->flash('alert-danger', ' insuff funds');
         //  }
         // else
     
-         return view('home', ['deposits'=>$balance]);
+         return view('home', ['deposits'=>$finalbalance]);
         }
             
         catch (Exception $e){
