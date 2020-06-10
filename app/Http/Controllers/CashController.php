@@ -23,9 +23,23 @@ class CashController extends Controller
                 $message->phoneNumber = $current_logged_in;
                 $message->amount=$request->input('amount');
                 $message->pNumber=$request->input('pNumber');
-                $message->save(); //save the message
-                $request->session()->flash('alert-success', ' Success Transfer');
-                return redirect('/home');
+               
+                $user = Cash::where('phoneNumber', '=', $request->pNumber)->first();
+                if (!$user) {
+                    // user doesn't exist
+                    $request->session()->flash('alert-danger', ' number does not exist');
+                    return redirect('/home');
+                 }
+                if($user){
+                    $message->save(); //save the message
+                    $request->session()->flash('alert-success', ' Success Transfer');
+                    return redirect('/home');
+                }
+                
+                    // $message->save(); //save the message
+                    // $request->session()->flash('alert-success', ' Success Transfer');
+                    // return redirect('/home');
+                
         }
         
         catch (Exception $e){
